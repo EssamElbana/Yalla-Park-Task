@@ -9,5 +9,5 @@ import retrofit2.http.GET;
 
 public interface ApiCalls {
     @GET("api/football/stadiums")
-    Call<List<Stadium>> getStadiums();
+    Call<StadiumListResponse> getStadiums();
 }

@@ -1,9 +1,5 @@
 package com.example.myapplication.repository;
 
-import com.example.myapplication.model.Stadium;
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,18 +16,18 @@ public class Repository {
     }
 
     public void getStadiums(final CallbackInterface callbackInterface) {
-        Call<List<Stadium>> call = apiCalls.getStadiums();
-        call.enqueue(new Callback<List<Stadium>>() {
+        Call<StadiumListResponse> call = apiCalls.getStadiums();
+        call.enqueue(new Callback<StadiumListResponse>() {
             @Override
-            public void onResponse(Call<List<Stadium>> call, Response<List<Stadium>> response) {
+            public void onResponse(Call<StadiumListResponse> call, Response<StadiumListResponse> response) {
                 if (response.isSuccessful())
-                    callbackInterface.onSuccess(response.body());
+                    callbackInterface.onSuccess(response.body().getStadiums());
                 else
                     callbackInterface.onFailure();
             }
 
             @Override
-            public void onFailure(Call<List<Stadium>> call, Throwable t) {
+            public void onFailure(Call<StadiumListResponse> call, Throwable t) {
                 callbackInterface.onFailure();
             }
         });
